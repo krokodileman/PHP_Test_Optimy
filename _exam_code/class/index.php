@@ -4,6 +4,7 @@
  * @deprecated use /public/index instead
  */
 define('ROOT', __DIR__);
+
 require_once(ROOT . '/utils/NewsManager.php');
 require_once(ROOT . '/utils/CommentManager.php');
 

@@ -22,6 +22,7 @@ class NewsService
 					->comments()
 					->get()
 					->map(function ($item) {
+
 						return new CommentData(
 							$item->id,
 							$item->body,

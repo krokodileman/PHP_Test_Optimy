@@ -12,25 +12,24 @@ class News extends Model
     protected $table = 'news';
     protected $fillable = ['title', 'body', 'created_at'];
 
-    // overriding the creation of timestamp updated_at column 
+    /**
+     * since im not adding the migration library
+     * I set datetime (updated_at) creation/insertion requirement to false
+     */
     public $timestamps = false;
 
     /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
+     * mutate to datatime.
      */
     protected $casts = [
         'created_at' => 'datetime',
     ];
 
+    /**
+     * added the relationship 
+     */
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class, 'news_id', 'id');
     }
-
-    // protected function asDateTime($value)
-    // {
-    //     return parent::asDateTime($value)->format('y-m-d H:m:s');
-    // }
 }

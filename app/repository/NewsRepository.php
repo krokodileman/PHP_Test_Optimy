@@ -24,37 +24,20 @@ class NewsRepository extends BaseRepository
             ->get();
     }
 
-    public function addNews(string $title, string $body): bool
-    {
-        $news = $this->news;
-
-        $news->title = $title;
-        $news->created_at = Carbon::now();
-        $news->body = $body;
-
-        return $news->save();
-    }
-
     /**
      * deletes a news, and also linked comments
      */
     public function deleteNews($id)
     {
-        //     $comments = $this->newsModel->listComments();
-        //     $idsToDelete = [];
+        $result = $this->news
+            ->where('id', $id)
+            ->with('comments')
+            ->first();
 
-        //     foreach ($comments as $comment) {
-        //         if ($comment->getNewsId() == $id) {
-        //             $idsToDelete[] = $comment->getId();
-        //         }
-        //     }
+        // deletes related comment
+        $result->comments()->delete();
 
-        //     foreach ($idsToDelete as $id) {
-        //         CommentManager::getInstance()->deleteComment($id);
-        //     }
-
-        //     $db = DB::getInstance();
-        //     $sql = "DELETE FROM `news` WHERE `id`=" . $id;
-        //     return $db->exec($sql);
+        // delete the parent record
+        $result->delete();
     }
 }

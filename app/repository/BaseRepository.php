@@ -2,7 +2,9 @@
 
 namespace App\Repository;
 
+use App\Dtos\CommentData;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 abstract class BaseRepository
 {
@@ -17,9 +19,37 @@ abstract class BaseRepository
     {
         return $this->model->create($data);
     }
-    public function update() {}
-    public function delete() {}
-    public function find() {}
 
-    // abstract protected function getModel(): Model;
+    /**
+     * deletes a news, and also linked comments
+     */
+
+    public function delete($id)
+    {
+        $result = $this->model->find($id);
+        return $result->delete();
+    }
+
+    public function find(int $id): Model
+    {
+        return $this->model->find($id);
+    }
+
+    /**
+     * get record list
+     */
+    public function lists(): Collection
+    {
+        return $this->model
+            ->get()
+            ->map(function ($comment) {
+
+                return new CommentData(
+                    $comment->id,
+                    $comment->body,
+                    $comment->created_at,
+                    $comment->news_id
+                );
+            });
+    }
 }
