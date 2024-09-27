@@ -13,3 +13,10 @@ This simple application works, but with very old-style monolithic codebase, so d
 
   - easier to work with
   - more maintainable
+
+
+# Environment Setup 
+
+# clone the code from github - 
+# run composer install from the root directory
+# to run file : navi

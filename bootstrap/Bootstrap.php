@@ -7,36 +7,47 @@ namespace App;
 use App\Models\Database;
 use App\Models\News;
 use App\Repository\NewsRepository;
+use App\Services\NewsService;
 
 require __DIR__ . '/../vendor/autoload.php';
 
 error_reporting(E_ALL);
 
-// init db connection
-// new Database();
+$dotenv = \Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
 
+$config = require __DIR__ . '/../config.php';
 
-App::setContainer(new Container());
+/**
+ * Container to bind dependencies 
+ */
 
-App::container()->bind(
-    NewsRepository::class,
+$container = new Container();
+
+$container->bind(
+    Database::class,
     function () {
-        return new News();
+        return new Database(new \Illuminate\Database\Capsule\Manager());
     }
 );
 
-// $container->bind(News::class, function () {});
-// /**
-//  * Register the error handler
-//  */
-// $whoops = new \Whoops\Run;
-// if ($environment !== 'production') {
-//     $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-// } else {
-//     $whoops->pushHandler(function ($e) {
-//         echo 'Todo: Friendly error page and send an email to the developer';
-//     });
-// }
-// $whoops->register();
 
-// throw new \Exception;
+$container->bind(
+    NewsService::class,
+    function () {
+        return  new NewsService(new NewsRepository(new News()));
+    }
+);
+
+/**
+ * Wrapper that can be called anywhere in the app
+ * container wrapped
+ */
+App::setContainer($container);
+
+
+/**
+ * resolve database manager dependency
+ */
+App::resolve(Database::class)
+    ->connection($config['connection']);

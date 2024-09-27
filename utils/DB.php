@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @deprecated, use App\Model\Database.php connection instead
+ */
 class DB
 {
 	private $pdo;

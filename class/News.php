@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @deprecated, use App\Dtos\NewsData.php  instead
+ */
+
 class News
 {
 	protected $id, $title, $body, $createdAt;

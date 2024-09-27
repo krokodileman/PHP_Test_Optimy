@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @deprecated, use App\Dtos\CommentData.php  instead
+ */
 class Comment
 {
 	protected $id, $body, $createdAt, $newsId;

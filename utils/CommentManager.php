@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @deprecated, use App\Repository\CommentRepository instead
+ */
 class CommentManager
 {
 	private static $instance = null;
@@ -25,12 +28,12 @@ class CommentManager
 		$rows = $db->select('SELECT * FROM `comment`');
 
 		$comments = [];
-		foreach($rows as $row) {
+		foreach ($rows as $row) {
 			$n = new Comment();
 			$comments[] = $n->setId($row['id'])
-			  ->setBody($row['body'])
-			  ->setCreatedAt($row['created_at'])
-			  ->setNewsId($row['news_id']);
+				->setBody($row['body'])
+				->setCreatedAt($row['created_at'])
+				->setNewsId($row['news_id']);
 		}
 
 		return $comments;
@@ -39,7 +42,7 @@ class CommentManager
 	public function addCommentForNews($body, $newsId)
 	{
 		$db = DB::getInstance();
-		$sql = "INSERT INTO `comment` (`body`, `created_at`, `news_id`) VALUES('". $body . "','" . date('Y-m-d') . "','" . $newsId . "')";
+		$sql = "INSERT INTO `comment` (`body`, `created_at`, `news_id`) VALUES('" . $body . "','" . date('Y-m-d') . "','" . $newsId . "')";
 		$db->exec($sql);
 		return $db->lastInsertId($sql);
 	}
