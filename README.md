@@ -1,6 +1,6 @@
 # PHP test
 
-############# Exam Code Guide ###############
+############# Exam Code ###############
 
 ## 1. Installation
 
@@ -8,7 +8,7 @@
   - import the dbdump.sql in the "phptest" database
 
 ## 2. Exam code repo 
-  - Clone the code from my public github repo - git@github.com:krokodileman/PHP_Test_Optimy.git
+  - Clone the code from my public github repo - https://github.com/krokodileman/PHP_Test_Optimy/tree/refactor-done
   - checkout to "refactor-done" repository name
   - create a .env file in your root directory and copy the vars from .env.example
   - put your sql server credentials in .env file vars
