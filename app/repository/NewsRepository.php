@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
+use App\Dtos\NewsData;
 use App\Models\News;
 use App\Repository\BaseRepository;
-use Carbon\Carbon;
 use Illuminate\Support\Collection;
 
 class NewsRepository extends BaseRepository
@@ -17,11 +17,20 @@ class NewsRepository extends BaseRepository
         parent::__construct($news);
     }
 
+    /**
+     * get news list
+     */
     public function listNews(): ?Collection
     {
-        return $this->news
-            ->with('comments')
-            ->get();
+        return $this->news->get()
+            ->map(function ($comment) {
+
+                return new NewsData(
+                    $comment->id,
+                    $comment->title,
+                    $comment->body,
+                );
+            });
     }
 
     /**
@@ -33,6 +42,11 @@ class NewsRepository extends BaseRepository
             ->where('id', $id)
             ->with('comments')
             ->first();
+
+        /** throw error for empty result */
+        if (empty($result)) {
+            throw new \Exception('No record found');
+        }
 
         // deletes related comment
         $result->comments()->delete();

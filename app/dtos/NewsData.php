@@ -15,7 +15,6 @@ class NewsData
 		public readonly int $id,
 		public readonly ?string $title,
 		public readonly ?string  $body,
-		public readonly ?string $createdAt,
-		public readonly ?Collection $comment,
+		public readonly ?Collection $comment = null,
 	) {}
 }

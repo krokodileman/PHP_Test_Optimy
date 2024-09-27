@@ -6,6 +6,7 @@ namespace App;
 
 use App\Models\Database;
 use App\Models\News;
+use App\Repository\Interface\INewsRepository;
 use App\Repository\NewsRepository;
 use App\Services\NewsService;
 

@@ -2,7 +2,6 @@
 
 namespace App\Repository;
 
-use App\Dtos\CommentData;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
@@ -40,16 +39,6 @@ abstract class BaseRepository
      */
     public function lists(): Collection
     {
-        return $this->model
-            ->get()
-            ->map(function ($comment) {
-
-                return new CommentData(
-                    $comment->id,
-                    $comment->body,
-                    $comment->created_at,
-                    $comment->news_id
-                );
-            });
+        return $this->model->get();
     }
 }

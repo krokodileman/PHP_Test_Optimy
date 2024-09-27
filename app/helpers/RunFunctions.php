@@ -39,4 +39,10 @@ function printNewsData()
 // App::resolve(NewsRepository::class)->delete(1);
 
 
-App::resolve(NewsRepository::class)->deleteNews(3);
+// catching errors thrown from delete attempt
+// try {
+//     App::resolve(NewsRepository::class)->deleteNews(3);
+// } catch (\Exception $e) {
+//     echo "\n";
+//     echo "DELETE ERROR:  {$e->getMessage()} " . "\n\n";
+// }

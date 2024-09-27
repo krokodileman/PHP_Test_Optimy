@@ -2,14 +2,13 @@
 
 ############# Exam Code Guide ###############
 
-
 ## A. Exam code repo 
   - Clone the code from my public github repo - https://github.com/krokodileman/PHP_Test_Optimy 
  
 ## B. Composer install
   - At the root directory, run composer install to add the dependencies found at composer.json file, if composer is not yet installed, please install using this link. - https://getcomposer.org/
 
-## C. Display data
+## C. Display data / Run functionalities
   - Naviate to public folder
   - Run the demo script in your shell:/public>  "php index.php"
   - Output should be the same format like with that of the old code

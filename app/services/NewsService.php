@@ -15,7 +15,7 @@ class NewsService
 	public function mapData(): ?Collection
 	{
 		return $this->newsRepository
-			->listNews()
+			->lists()
 			->map(function ($news) {
 
 				$commentCollection = $news
@@ -26,7 +26,6 @@ class NewsService
 						return new CommentData(
 							$item->id,
 							$item->body,
-							$item->created_at,
 							$item->news_id
 						);
 					});
@@ -35,7 +34,6 @@ class NewsService
 					$news->id,
 					$news->title,
 					$news->body,
-					$news->created_at,
 					$commentCollection,
 				);
 			});
